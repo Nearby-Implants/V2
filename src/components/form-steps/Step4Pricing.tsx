@@ -121,13 +121,13 @@ export function Step4Pricing() {
                 <input
                   type="number"
                   min="0"
-                  value={formData.pricingInfo.priceRange.min || ''}
+                  value={formData.pricingInfo.priceRange?.min || ''}
                   onChange={(e) =>
                     updateFormData('pricingInfo', {
                       ...formData.pricingInfo,
                       priceRange: {
-                        ...formData.pricingInfo.priceRange,
                         min: Number(e.target.value),
+                        max: formData.pricingInfo.priceRange?.max || 0,
                       },
                     })
                   }
@@ -143,12 +143,12 @@ export function Step4Pricing() {
                 <input
                   type="number"
                   min="0"
-                  value={formData.pricingInfo.priceRange.max || ''}
+                  value={formData.pricingInfo.priceRange?.max || ''}
                   onChange={(e) =>
                     updateFormData('pricingInfo', {
                       ...formData.pricingInfo,
                       priceRange: {
-                        ...formData.pricingInfo.priceRange,
+                        min: formData.pricingInfo.priceRange?.min || 0,
                         max: Number(e.target.value),
                       },
                     })
@@ -207,13 +207,13 @@ export function Step4Pricing() {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={formData.pricingInfo.paymentPlans.inHouse}
+                checked={formData.pricingInfo.paymentPlans?.inHouse || false}
                 onChange={(e) =>
                   updateFormData('pricingInfo', {
                     ...formData.pricingInfo,
                     paymentPlans: {
-                      ...formData.pricingInfo.paymentPlans,
                       inHouse: e.target.checked,
+                      careCredit: formData.pricingInfo.paymentPlans?.careCredit || false,
                     },
                   })
                 }
@@ -224,12 +224,12 @@ export function Step4Pricing() {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={formData.pricingInfo.paymentPlans.careCredit}
+                checked={formData.pricingInfo.paymentPlans?.careCredit || false}
                 onChange={(e) =>
                   updateFormData('pricingInfo', {
                     ...formData.pricingInfo,
                     paymentPlans: {
-                      ...formData.pricingInfo.paymentPlans,
+                      inHouse: formData.pricingInfo.paymentPlans?.inHouse || false,
                       careCredit: e.target.checked,
                     },
                   })

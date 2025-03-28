@@ -31,6 +31,9 @@ export function Step6Credentials() {
     });
   };
 
+  // Define the licenses object with the correct properties
+  const licenses = formData.credentialsInfo.licenses || { stateLicense: '', deaRegistration: '' };
+
   return (
     <motion.div
       className="w-full max-w-3xl mx-auto space-y-8"
@@ -51,42 +54,40 @@ export function Step6Credentials() {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Education</h3>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Dental School</label>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Dental School</label>
               <input
                 type="text"
-                value={formData.credentialsInfo.education.dentalSchool || ''}
+                value={formData.credentialsInfo.education?.dentalSchool || ''}
                 onChange={(e) =>
                   updateFormData('credentialsInfo', {
                     ...formData.credentialsInfo,
                     education: {
-                      ...formData.credentialsInfo.education,
                       dentalSchool: e.target.value,
                     },
                   })
                 }
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-                placeholder="School name"
+                placeholder="Enter dental school name"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Graduation Year</label>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Graduation Year</label>
               <input
                 type="number"
                 min="1900"
                 max={new Date().getFullYear()}
-                value={formData.credentialsInfo.education.graduationYear || ''}
+                value={formData.credentialsInfo.education?.graduationYear || ''}
                 onChange={(e) =>
                   updateFormData('credentialsInfo', {
                     ...formData.credentialsInfo,
                     education: {
-                      ...formData.credentialsInfo.education,
                       graduationYear: Number(e.target.value),
                     },
                   })
                 }
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-                placeholder="Year"
+                placeholder="Enter graduation year"
               />
             </div>
           </div>
@@ -96,40 +97,21 @@ export function Step6Credentials() {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Licenses</h3>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">State License Number</label>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">State License Number</label>
               <input
                 type="text"
-                value={formData.credentialsInfo.licenses.stateLicense || ''}
+                value={formData.credentialsInfo.licenses?.stateLicense || ''}
                 onChange={(e) =>
                   updateFormData('credentialsInfo', {
                     ...formData.credentialsInfo,
                     licenses: {
-                      ...formData.credentialsInfo.licenses,
                       stateLicense: e.target.value,
                     },
                   })
                 }
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-                placeholder="License number"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">DEA Registration Number</label>
-              <input
-                type="text"
-                value={formData.credentialsInfo.licenses.deaRegistration || ''}
-                onChange={(e) =>
-                  updateFormData('credentialsInfo', {
-                    ...formData.credentialsInfo,
-                    licenses: {
-                      ...formData.credentialsInfo.licenses,
-                      deaRegistration: e.target.value,
-                    },
-                  })
-                }
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-                placeholder="DEA number"
+                placeholder="Enter state license number"
               />
             </div>
           </div>

@@ -39,9 +39,9 @@ export function Step10Preview() {
 
   return (
     <motion.div
-      initial={animations.initial}
-      animate={animations.animate}
-      exit={animations.exit}
+      initial={animations.fadeIn.initial}
+      animate={animations.fadeIn.animate}
+      exit={animations.fadeIn.exit}
       className="space-y-8"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -222,7 +222,7 @@ export function Step10Preview() {
           {formData.reviewsInfo.overallRating && (
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Overall Rating</label>
-              <p className="mt-1">{formData.reviewsInfo.overallRating}/5</p>
+              <p className="mt-1">{formData.reviewsInfo.overallRating ?? 0}/5</p>
             </div>
           )}
           {formData.reviewsInfo.totalReviews && (

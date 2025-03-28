@@ -58,10 +58,7 @@ export interface ReviewsInfo {
   overallRating?: number;
   totalReviews?: number;
   beforeAfterPhotos?: File[];
-  testimonials: {
-    text: string;
-    videoUrl?: string;
-  }[];
+  testimonials: Testimonial[];
   googleReviewsBadge?: string;
 }
 

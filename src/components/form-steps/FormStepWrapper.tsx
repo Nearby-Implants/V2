@@ -6,7 +6,6 @@ import { Step1Basic } from './Step1Basic';
 import { Step2Contact } from './Step2Contact';
 import { Step3Services } from './Step3Services';
 import { Step4Pricing } from './Step4Pricing';
-import { Step5Reviews } from './Step5Reviews';
 import { Step6Credentials } from './Step6Credentials';
 import { Step7ClinicFeatures } from './Step7ClinicFeatures';
 import { Step8Booking } from './Step8Booking';
@@ -18,7 +17,7 @@ const formSteps = {
   2: Step2Contact,
   3: Step3Services,
   4: Step4Pricing,
-  5: Step5Reviews,
+  5: undefined,
   6: Step6Credentials,
   7: Step7ClinicFeatures,
   8: Step8Booking,

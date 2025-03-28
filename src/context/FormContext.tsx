@@ -51,9 +51,14 @@ const initialFormData: FormData = {
     testimonials: [],
   },
   credentialsInfo: {
-    yearsInPractice: 0,
-    boardCertifications: [],
-    professionalMemberships: [],
+    education: {
+      dentalSchool: '',
+      graduationYear: undefined,
+    },
+    licenses: {
+      stateLicense: '',
+    },
+    certifications: [],
   },
   clinicFeatures: {
     officeHours: {},
@@ -73,7 +78,9 @@ const initialFormData: FormData = {
     liveChat: {},
   },
   seoInfo: {
-    faqs: [],
+    metaTitle: '',
+    metaDescription: '',
+    keywords: [],
   },
 };
 
