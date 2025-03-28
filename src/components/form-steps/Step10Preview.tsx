@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { animations } from '@/config/theme';
 import Image from 'next/image';
 import { Testimonial, Certification } from '@/types/form.types';
+import { toast } from 'react-hot-toast';
 
 interface OperatingHours {
   open: string;
@@ -25,6 +26,16 @@ export function Step10Preview() {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await submitForm();
+      // You can add additional success handling here
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Failed to submit form. Please try again.');
+    }
   };
 
   return (
@@ -355,7 +366,7 @@ export function Step10Preview() {
           <Button onClick={previousStep} variant="outline">
             Previous
           </Button>
-          <Button onClick={submitForm}>Submit Profile</Button>
+          <Button onClick={handleSubmit}>Submit Profile</Button>
         </div>
       </div>
     </motion.div>

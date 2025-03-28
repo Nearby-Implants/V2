@@ -14,6 +14,7 @@ interface FormContextType {
   previousStep: () => void;
   isFirstStep: boolean;
   isLastStep: boolean;
+  submitForm: () => Promise<void>;
 }
 
 const initialFormData: FormData = {
@@ -162,6 +163,7 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
     previousStep,
     isFirstStep: currentStep === 1,
     isLastStep: currentStep === 10,
+    submitForm,
   };
 
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
