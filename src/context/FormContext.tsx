@@ -1,5 +1,9 @@
 'use client';
 
+import { createContext, useContext, useState, useEffect } from 'react';
+import { FormData, FormStep } from '@/types/form.types';
+import toast from 'react-hot-toast';
+
 interface FormContextType {
   currentStep: FormStep;
   formData: FormData;
@@ -112,6 +116,39 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
   const previousStep = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => (prev - 1) as FormStep);
+    }
+  };
+
+  const submitForm = async () => {
+    try {
+      // Validate required fields
+      if (!formData.basicInfo.clinicName) {
+        throw new Error('Clinic name is required');
+      }
+      if (!formData.contactInfo.email) {
+        throw new Error('Email is required');
+      }
+      if (!formData.contactInfo.phoneNumber) {
+        throw new Error('Phone number is required');
+      }
+
+      // Show loading toast
+      const loadingToast = toast.loading('Submitting form...');
+
+      // Here you would typically make an API call to submit the form
+      // For now, we'll just simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Clear form data from localStorage after successful submission
+      localStorage.removeItem('formData');
+      
+      // Dismiss loading toast and show success
+      toast.dismiss(loadingToast);
+      toast.success('Form submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error(error instanceof Error ? error.message : 'Error submitting form');
+      throw error;
     }
   };
 

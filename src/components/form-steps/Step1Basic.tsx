@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { animations } from '@/config/theme';
 import { useCallback, useState } from 'react';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 export function Step1Basic() {
   const { formData, updateFormData, nextStep } = useForm();
@@ -13,32 +14,54 @@ export function Step1Basic() {
   const [coverImagePreview, setCoverImagePreview] = useState<string | null>(null);
 
   const handleProfilePhotoChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      updateFormData('basicInfo', {
-        ...formData.basicInfo,
-        profilePhoto: file,
-      });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePhotoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    try {
+      const file = e.target.files?.[0];
+      if (file) {
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+          throw new Error('File size must be less than 5MB');
+        }
+        if (!file.type.startsWith('image/')) {
+          throw new Error('File must be an image');
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setProfilePhotoPreview(reader.result as string);
+          updateFormData('basicInfo', {
+            ...formData.basicInfo,
+            profilePhoto: file,
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error('Error uploading profile photo:', error);
+      toast.error(error instanceof Error ? error.message : 'Error uploading profile photo');
     }
   }, [formData.basicInfo, updateFormData]);
 
   const handleCoverImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      updateFormData('basicInfo', {
-        ...formData.basicInfo,
-        coverImage: file,
-      });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCoverImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    try {
+      const file = e.target.files?.[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) { // 10MB limit
+          throw new Error('File size must be less than 10MB');
+        }
+        if (!file.type.startsWith('image/')) {
+          throw new Error('File must be an image');
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setCoverImagePreview(reader.result as string);
+          updateFormData('basicInfo', {
+            ...formData.basicInfo,
+            coverImage: file,
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error('Error uploading cover image:', error);
+      toast.error(error instanceof Error ? error.message : 'Error uploading cover image');
     }
   }, [formData.basicInfo, updateFormData]);
 
