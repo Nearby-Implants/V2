@@ -18,7 +18,7 @@ type OperatingHoursMap = {
 };
 
 export function Step10Preview() {
-  const { formData, prevStep, submitForm } = useForm();
+  const { formData, previousStep, submitForm } = useForm();
 
   const formatTime = (time: string) => {
     return new Date(`1970-01-01T${time}`).toLocaleTimeString('en-US', {
@@ -429,7 +429,7 @@ export function Step10Preview() {
       </div>
 
       <div className="flex justify-between">
-        <Button variant="outline" onClick={prevStep}>
+        <Button variant="outline" onClick={previousStep}>
           Previous
         </Button>
         <Button onClick={handleSubmit}>Submit Profile</Button>
