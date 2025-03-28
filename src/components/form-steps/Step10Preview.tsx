@@ -12,6 +12,10 @@ interface OperatingHours {
   close: string;
 }
 
+type OperatingHoursMap = {
+  [key: string]: OperatingHours;
+};
+
 export function Step10Preview() {
   const { formData, previousStep, submitForm } = useForm();
 
@@ -277,7 +281,7 @@ export function Step10Preview() {
           <div>
             <label className="block text-sm font-medium text-muted-foreground">Operating Hours</label>
             <div className="mt-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(formData.clinicFeatures.operatingHours).map(([day, hours]: [string, OperatingHours]) => (
+              {(Object.entries(formData.clinicFeatures.operatingHours) as [string, OperatingHours][]).map(([day, hours]) => (
                 <div key={day} className="flex justify-between items-center">
                   <span className="capitalize">{day}</span>
                   <span>
