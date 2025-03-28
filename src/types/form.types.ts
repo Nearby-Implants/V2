@@ -43,19 +43,21 @@ export interface PricingInfo {
     type: 'free' | 'paid';
     amount?: number;
   };
-  priceRange: {
+  priceRange?: {
     min: number;
     max: number;
   };
   insuranceAccepted: string[];
-  paymentPlans: {
+  paymentPlans?: {
     inHouse: boolean;
     careCredit: boolean;
   };
 }
 
 export interface ReviewsInfo {
-  beforeAfterPhotos: File[];
+  overallRating?: number;
+  totalReviews?: number;
+  beforeAfterPhotos?: File[];
   testimonials: {
     text: string;
     videoUrl?: string;
@@ -64,9 +66,14 @@ export interface ReviewsInfo {
 }
 
 export interface CredentialsInfo {
-  yearsInPractice: number;
-  boardCertifications: string[];
-  professionalMemberships: string[];
+  education?: {
+    dentalSchool?: string;
+    graduationYear?: number;
+  };
+  licenses?: {
+    stateLicense?: string;
+  };
+  certifications: Certification[];
 }
 
 export interface ClinicFeatures {
@@ -76,12 +83,12 @@ export interface ClinicFeatures {
       close: string;
     };
   };
-  emergencyServices: {
+  emergencyServices?: {
     available24_7: boolean;
     sameDayAppointments: boolean;
   };
   languagesSpoken: string[];
-  parkingAndAccessibility: {
+  parkingAndAccessibility?: {
     freeParking: boolean;
     wheelchairAccess: boolean;
     other?: string[];
@@ -92,20 +99,16 @@ export interface BookingInfo {
   enableOnlineBooking: boolean;
   bookingSystem: 'calendly' | 'zocdoc' | 'inHouse' | null;
   bookingUrl?: string;
-  liveChat: {
+  liveChat?: {
     whatsapp?: string;
     messenger?: string;
   };
 }
 
-export interface SeoInfo {
-  faqs: {
-    question: string;
-    answer: string;
-  }[];
+export interface SEOInfo {
   metaTitle?: string;
   metaDescription?: string;
-  schemaMarkup?: string;
+  keywords?: string[];
 }
 
 export interface FormData {
@@ -117,5 +120,5 @@ export interface FormData {
   credentialsInfo: CredentialsInfo;
   clinicFeatures: ClinicFeatures;
   bookingInfo: BookingInfo;
-  seoInfo: SeoInfo;
+  seoInfo?: SEOInfo;
 } 
