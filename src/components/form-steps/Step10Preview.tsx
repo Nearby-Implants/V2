@@ -60,7 +60,7 @@ export function Step10Preview() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Clinic/Dentist Name</label>
-              <p className="mt-1">{formData.basicInfo.name}</p>
+              <p className="mt-1">{formData.basicInfo.clinicName}</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Tagline</label>
@@ -101,7 +101,7 @@ export function Step10Preview() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Phone</label>
-              <p className="mt-1">{formData.contactInfo.phone}</p>
+              <p className="mt-1">{formData.contactInfo.phoneNumber}</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Email</label>
@@ -265,7 +265,7 @@ export function Step10Preview() {
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Languages</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.clinicFeatures.languages.map((language: string) => (
+                {formData.clinicFeatures.languagesSpoken.map((language: string) => (
                   <span
                     key={language}
                     className="px-3 py-1 bg-primary/10 text-primary rounded-full"
@@ -278,7 +278,7 @@ export function Step10Preview() {
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Amenities</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.clinicFeatures.amenities.map((amenity: string) => (
+                {formData.clinicFeatures.parkingAndAccessibility.other?.map((amenity: string) => (
                   <span
                     key={amenity}
                     className="px-3 py-1 bg-primary/10 text-primary rounded-full"
@@ -292,7 +292,7 @@ export function Step10Preview() {
           <div>
             <label className="block text-sm font-medium text-muted-foreground">Operating Hours</label>
             <div className="mt-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(Object.entries(formData.clinicFeatures.operatingHours) as [string, OperatingHours][]).map(([day, hours]) => (
+              {(Object.entries(formData.clinicFeatures.officeHours) as [string, OperatingHours][]).map(([day, hours]) => (
                 <div key={day} className="flex justify-between items-center">
                   <span className="capitalize">{day}</span>
                   <span>
@@ -329,6 +329,18 @@ export function Step10Preview() {
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Cancellation Policy</label>
               <p className="mt-1 whitespace-pre-wrap">{formData.bookingInfo.cancellationPolicy}</p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Booking System</label>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {formData.bookingInfo.bookingSystem && (
+                  <span
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
+                    {formData.bookingInfo.bookingSystem}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
