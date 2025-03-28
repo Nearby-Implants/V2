@@ -1,3 +1,5 @@
+'use client';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from '@/context/FormContext';
 import { Step1Basic } from './Step1Basic';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useForm } from '@/context/FormContext';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
