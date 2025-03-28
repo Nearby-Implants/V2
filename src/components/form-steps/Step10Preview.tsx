@@ -100,22 +100,41 @@ export function Step10Preview() {
         {/* Services */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Specialties</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.servicesInfo.specialties.map((specialty, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.servicesInfo.specialties.map((specialty: string) => (
+                  <span
+                    key={specialty}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {specialty}
                   </span>
                 ))}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-muted-foreground">Technologies</label>
+              <label className="block text-sm font-medium text-muted-foreground">Additional Services</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.servicesInfo.technologies.map((tech, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.servicesInfo.additionalServices.map((service: string) => (
+                  <span
+                    key={service}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Technology</label>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {formData.servicesInfo.technology.map((tech: string) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {tech}
                   </span>
                 ))}
@@ -137,20 +156,83 @@ export function Step10Preview() {
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-muted-foreground">Price Range</label>
-              <p className="mt-1">
-                ${formData.pricingInfo.priceRange.min} - ${formData.pricingInfo.priceRange.max}
-              </p>
-            </div>
-            <div>
               <label className="block text-sm font-medium text-muted-foreground">Insurance Accepted</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.pricingInfo.insuranceAccepted.map((insurance, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.pricingInfo.insuranceAccepted.map((insurance: string) => (
+                  <span
+                    key={insurance}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {insurance}
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Reviews</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Overall Rating</label>
+              <p className="mt-1">{formData.reviewsInfo.overallRating}/5</p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Total Reviews</label>
+              <p className="mt-1">{formData.reviewsInfo.totalReviews}</p>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-muted-foreground">Testimonials</label>
+            <div className="mt-1 space-y-4">
+              {formData.reviewsInfo.testimonials.map((review, index) => (
+                <div key={index} className="p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <p className="font-medium">{review.name}</p>
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-yellow-400">
+                          {i < review.rating ? '★' : '☆'}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-2 text-muted-foreground">{review.comment}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Credentials */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Credentials</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Education</label>
+              <p className="mt-1">
+                {formData.credentialsInfo.education.dentalSchool} ({formData.credentialsInfo.education.graduationYear})
+              </p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">State License</label>
+              <p className="mt-1">{formData.credentialsInfo.licenses.stateLicense}</p>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-muted-foreground">Certifications</label>
+            <div className="mt-1 space-y-2">
+              {formData.credentialsInfo.certifications.map((cert, index) => (
+                <div key={index} className="p-3 border rounded-lg">
+                  <p className="font-medium">{cert.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Issued by: {cert.issuer}
+                    {cert.date && ` • ${new Date(cert.date).toLocaleDateString()}`}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -160,20 +242,13 @@ export function Step10Preview() {
           <h3 className="text-lg font-semibold">Clinic Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-muted-foreground">Operating Hours</label>
-              <div className="mt-1 space-y-1">
-                {Object.entries(formData.clinicFeatures.operatingHours).map(([day, hours]) => (
-                  <p key={day} className="text-sm">
-                    {day.charAt(0).toUpperCase() + day.slice(1)}: {formatTime(hours.open)} - {formatTime(hours.close)}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <div>
               <label className="block text-sm font-medium text-muted-foreground">Languages</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.clinicFeatures.languages.map((language, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.clinicFeatures.languages.map((language: string) => (
+                  <span
+                    key={language}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {language}
                   </span>
                 ))}
@@ -182,12 +257,57 @@ export function Step10Preview() {
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Amenities</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.clinicFeatures.amenities.map((amenity, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.clinicFeatures.amenities.map((amenity: string) => (
+                  <span
+                    key={amenity}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {amenity}
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-muted-foreground">Operating Hours</label>
+            <div className="mt-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {Object.entries(formData.clinicFeatures.operatingHours).map(([day, hours]) => (
+                <div key={day} className="flex justify-between items-center">
+                  <span className="capitalize">{day}</span>
+                  <span>
+                    {hours.open ? formatTime(hours.open) : 'Closed'} -{' '}
+                    {hours.close ? formatTime(hours.close) : 'Closed'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Booking Information */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold">Booking Information</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Booking Platforms</label>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {formData.bookingInfo.platforms.map((platform: string) => (
+                  <span
+                    key={platform}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
+                    {platform}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Booking Policy</label>
+              <p className="mt-1 whitespace-pre-wrap">{formData.bookingInfo.policy}</p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground">Cancellation Policy</label>
+              <p className="mt-1 whitespace-pre-wrap">{formData.bookingInfo.cancellationPolicy}</p>
             </div>
           </div>
         </div>
@@ -207,8 +327,11 @@ export function Step10Preview() {
             <div>
               <label className="block text-sm font-medium text-muted-foreground">Keywords</label>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.seoInfo.keywords.map((keyword, index) => (
-                  <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {formData.seoInfo.keywords.map((keyword: string) => (
+                  <span
+                    key={keyword}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full"
+                  >
                     {keyword}
                   </span>
                 ))}
@@ -216,13 +339,14 @@ export function Step10Preview() {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-between">
-        <Button variant="outline" onClick={previousStep}>
-          Previous
-        </Button>
-        <Button onClick={submitForm}>Submit Profile</Button>
+        {/* Navigation Buttons */}
+        <div className="flex justify-between pt-4">
+          <Button onClick={previousStep} variant="outline">
+            Previous
+          </Button>
+          <Button onClick={submitForm}>Submit Profile</Button>
+        </div>
       </div>
     </motion.div>
   );
