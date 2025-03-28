@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { animations } from '@/config/theme';
 import Image from 'next/image';
+import { Testimonial, Certification } from '@/types/form.types';
 
 export function Step10Preview() {
   const { formData, previousStep, submitForm } = useForm();
@@ -187,7 +188,7 @@ export function Step10Preview() {
           <div>
             <label className="block text-sm font-medium text-muted-foreground">Testimonials</label>
             <div className="mt-1 space-y-4">
-              {formData.reviewsInfo.testimonials.map((review, index) => (
+              {formData.reviewsInfo.testimonials.map((review: Testimonial, index: number) => (
                 <div key={index} className="p-4 border rounded-lg">
                   <div className="flex items-center justify-between">
                     <p className="font-medium">{review.name}</p>
@@ -224,7 +225,7 @@ export function Step10Preview() {
           <div>
             <label className="block text-sm font-medium text-muted-foreground">Certifications</label>
             <div className="mt-1 space-y-2">
-              {formData.credentialsInfo.certifications.map((cert, index) => (
+              {formData.credentialsInfo.certifications.map((cert: Certification, index: number) => (
                 <div key={index} className="p-3 border rounded-lg">
                   <p className="font-medium">{cert.name}</p>
                   <p className="text-sm text-muted-foreground">
