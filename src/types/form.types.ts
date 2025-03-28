@@ -1,5 +1,18 @@
 export type FormStep = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
+export interface Testimonial {
+  name: string;
+  rating: number;
+  comment: string;
+  date?: string;
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  date?: string;
+}
+
 export interface BasicInfo {
   clinicName: string;
   tagline?: string;
