@@ -7,6 +7,11 @@ import { animations } from '@/config/theme';
 import Image from 'next/image';
 import { Testimonial, Certification } from '@/types/form.types';
 
+interface OperatingHours {
+  open: string;
+  close: string;
+}
+
 export function Step10Preview() {
   const { formData, previousStep, submitForm } = useForm();
 
@@ -272,7 +277,7 @@ export function Step10Preview() {
           <div>
             <label className="block text-sm font-medium text-muted-foreground">Operating Hours</label>
             <div className="mt-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(formData.clinicFeatures.operatingHours).map(([day, hours]) => (
+              {Object.entries(formData.clinicFeatures.operatingHours).map(([day, hours]: [string, OperatingHours]) => (
                 <div key={day} className="flex justify-between items-center">
                   <span className="capitalize">{day}</span>
                   <span>
